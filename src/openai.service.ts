@@ -1,8 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
-import OpenAI from 'openai';
-import { CONFIG_OPTIONS } from './interface/options.interface';
-import { OpenaiClientProvider } from './provider/openai-client.provider';
-import { Message } from './dto/message.dto';
+import { Inject, Injectable } from "@nestjs/common";
+import OpenAI from "openai";
+import { CONFIG_OPTIONS } from "./interface/options.interface";
+import { OpenaiClientProvider } from "./provider/openai-client.provider";
+import { Message } from "./dto/message.dto";
+import * as process from "process";
 
 @Injectable()
 export class OpenaiService {
@@ -15,21 +16,31 @@ export class OpenaiService {
     this.openAI = this.openAIClientProvider.openAI;
   }
 
-  async chatUsage(
-    messages: Message[],
-    userId: string,
-    temperature?: 1,
-    numberOfCompletions?: 1,
-  ): Promise<OpenAI.Chat.Completions.ChatCompletionMessage> {
-    const completion: OpenAI.Chat.Completions.ChatCompletion =
-      await this.openAI.chat.completions.create({
-        model: this.config.model,
-        user: userId,
-        messages,
-        temperature,
-        n: numberOfCompletions,
-      });
+  async chat(messages: Message[], userId: string, temperature?: 1, n?: 1) {
+    const completion = await this.openAI.chat.completions.create({
+      model: this.config.model,
+      user: userId,
+      messages,
+      temperature,
+      n,
+    });
 
     return completion.choices[0].message;
+  }
+
+  async stream(messages: Message[], userId: string, temperature?: 1, n?: 1) {
+    const stream = this.openAI.beta.chat.completions.stream({
+      model: this.config.model,
+      user: userId,
+      messages,
+      temperature,
+      n
+    });
+
+    stream.on('content', (delta: string, snapshot: string) => {
+      process.stdout.write(delta);
+    });
+
+    return await stream.finalChatCompletion();
   }
 }
