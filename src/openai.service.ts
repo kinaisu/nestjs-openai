@@ -1,9 +1,9 @@
-import { Inject, Injectable } from "@nestjs/common";
-import OpenAI from "openai";
-import { CONFIG_OPTIONS } from "./interface/options.interface";
-import { OpenaiClientProvider } from "./provider/openai-client.provider";
-import { Message } from "./dto/message.dto";
-import * as process from "process";
+import { Inject, Injectable } from '@nestjs/common';
+import OpenAI from 'openai';
+import { CONFIG_OPTIONS } from './interface/options.interface';
+import { OpenaiClientProvider } from './provider/openai-client.provider';
+import { Message } from './dto/message.dto';
+import * as process from 'process';
 
 @Injectable()
 export class OpenaiService {
@@ -34,7 +34,7 @@ export class OpenaiService {
       user: userId,
       messages,
       temperature,
-      n
+      n,
     });
 
     stream.on('content', (delta: string, snapshot: string) => {

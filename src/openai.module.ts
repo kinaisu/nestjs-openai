@@ -9,10 +9,10 @@ import {
 
 @Global()
 @Module({})
-export class OpenaiModule {
+export class OpenAIModule {
   static forRoot(options: OpenAIOptions): DynamicModule {
     return {
-      module: OpenaiModule,
+      module: OpenAIModule,
       providers: [
         {
           provide: CONFIG_OPTIONS,
@@ -27,7 +27,7 @@ export class OpenaiModule {
 
   static forRootAsync(asyncOptions: OpenAIAsyncOptions): DynamicModule {
     return {
-      module: OpenaiModule,
+      module: OpenAIModule,
       imports: asyncOptions.imports,
       providers: [
         {
