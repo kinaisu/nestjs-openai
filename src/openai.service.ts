@@ -37,7 +37,7 @@ export class OpenaiService {
       n,
     });
 
-    stream.on('content', (delta: string, snapshot: string) => {
+    stream.on('content', (delta: string) => {
       process.stdout.write(delta);
     });
 

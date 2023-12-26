@@ -23,7 +23,7 @@ $ npm i @all-inclusive/nestjs-openai
 In a parent module "forRoot"
 
 ```ts
-import { OpenAiModule, Models } from "@webeleon/nestjs-openai";
+import { OpenAiModule, Models } from "@all-inclusive/nestjs-openai";
 
 @Module({
   imports: [
@@ -39,7 +39,7 @@ class AppModule {}
 In a parent module "forRootAsync"
 
 ```ts
-import { OpenAiModule, Models } from "@webeleon/nestjs-openai";
+import { OpenAiModule, Models } from "@all-inclusive/nestjs-openai";
 
 @Module({
   imports: [
