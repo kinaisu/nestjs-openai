@@ -1,6 +1,6 @@
 {
   "name": "@all-inclusive/nestjs-openai",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "OpenAI API client for nestjs",
   "author": "Oleksii Shcherbak <kinaisu@gmail.com>",
   "private": false,
